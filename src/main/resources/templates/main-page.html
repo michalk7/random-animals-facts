@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Animals Facts</title>
+</head>
+<body>
+    <h1>Welcome in Random Animals Facts App!</h1>
+    <p>Choose an animal type for which you want to receive a fact.</p>
+
+    <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post">
+        <select th:field="*{animalType}">
+            <option value="">Nothing selected</option>
+            <option th:value="'dog'" th:text="Dog"></option>
+            <option th:value="'cat'" th:text="Cat"></option>
+        </select>
+        <button type="submit">Get fact</button>
+    </form>
+</body>
+</html>
