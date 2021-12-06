@@ -10,13 +10,24 @@
 
     <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post">
         <label for="animalType">Animal Type:</label>
-        <select id="animalType" th:field="*{animalType}">
-            <option th:value="'dog'" th:text="Dog"></option>
-            <option th:value="'cat'" th:text="Cat"></option>
-        </select>
+        <div>
+            <select id="animalType" th:field="*{animalType}" required>
+                <option th:value="'dog'" th:text="Dog"></option>
+                <option th:value="'cat'" th:text="Cat"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('animalType')}">
+                <p th:each="err : ${#fields.errors('animalType')}" th:text="${err}"></p>
+            </div>
+        </div>
         <br>
         <label for="factsAmount">Facts Amount:</label>
-        <input id="factsAmount" type="number" th:field="*{factsAmount}">
+        <div>
+            <input id="factsAmount" type="number" required th:field="*{factsAmount}">
+            <div th:if="${#fields.hasErrors('factsAmount')}">
+                <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"></p>
+            </div>
+        </div>
+
         <br>
         <button type="submit">Get fact</button>
     </form>
