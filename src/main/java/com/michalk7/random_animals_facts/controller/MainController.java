@@ -10,17 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/")
+    @GetMapping({"", "/"})
     public String mainPage(Model model) {
         GeneratorParametersDTO generatorParameters = new GeneratorParametersDTO();
         model.addAttribute("generatorParameters", generatorParameters);
-        return "main-page";
-    }
-
-    @PostMapping("/facts/generate")
-    public String generateFact(@ModelAttribute("generatorParameters") GeneratorParametersDTO generatorParametersDTO) {
-        String tmp = generatorParametersDTO.getAnimalType();
-
         return "main-page";
     }
 

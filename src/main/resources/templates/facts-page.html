@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facts</title>
+</head>
+<body>
+    <h1>Facts for today:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fact</th>
+                <th>Author</th>
+                <th>Source</th>
+                <th>Verified</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(factList)}">
+                <td colspan="4">No data.</td>
+            </tr>
+            <tr th:each="fact, iStat : ${factList}">
+                <td><span th:text="${iStat.index + 1}"></span></td>
+                <td><span th:text="${fact.text}"></span></td>
+                <td><span th:text="${fact.user}"></span></td>
+                <td><span th:text="${fact.source}"></span></td>
+                <td><span th:text="${fact.status.isVerified()}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <a th:href="@{'/'}">Back to main page</a>
+</body>
+</html>
