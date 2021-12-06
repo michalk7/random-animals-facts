@@ -9,4 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GeneratorParametersDTO {
     private String animalType;
+    private int factsAmount;
 }
