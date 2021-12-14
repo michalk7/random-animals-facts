@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Random Animals Facts</title>
+    <link th:include="fragments/header :: header-css" th:remove="tag"/>
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
     <h1>Welcome in Random Animals Facts App!</h1>
     <p>Choose an animal type for which you want to receive a fact.</p>
 
-    <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post">
-        <label for="animalType">Animal Type:</label>
-        <div>
-            <select id="animalType" th:field="*{animalType}" required>
-                <option th:value="'dog'" th:text="Dog"></option>
-                <option th:value="'cat'" th:text="Cat"></option>
-            </select>
-            <div th:if="${#fields.hasErrors('animalType')}">
-                <p th:each="err : ${#fields.errors('animalType')}" th:text="${err}"></p>
+    <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post"
+          th:classappend="${ not #ctx.containsVariable('validated') } ? was-validated : needs-validation">
+        <div class="mb-3">
+            <label for="animalType" class="form-label">Animal Type:</label>
+            <div>
+                <select id="animalType" th:field="*{animalType}" required class="form-select form-select-lg mb-3">
+                    <option th:value="'dog'" th:text="Dog"></option>
+                    <option th:value="'cat'" th:text="Cat"></option>
+                </select>
+                <div th:if="${#fields.hasErrors('animalType')}">
+                    <p th:each="err : ${#fields.errors('animalType')}" th:text="${err}"></p>
+                </div>
             </div>
         </div>
-        <br>
-        <label for="factsAmount">Facts Amount:</label>
-        <div>
-            <input id="factsAmount" type="number" required th:field="*{factsAmount}">
-            <div th:if="${#fields.hasErrors('factsAmount')}">
-                <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"></p>
+        <div class="mb-3">
+            <label for="factsAmount" class="form-label">Facts Amount:</label>
+            <input class="form-control" id="factsAmount" type="number" required th:field="*{factsAmount}"
+                   th:classappend="${ #fields.hasErrors('factsAmount') } ? is-invalid : (${ not #ctx.containsVariable('validated') } ? is-valid)"/>
+            <div class="invalid-feedback">
+                <div th:if="${ not #fields.hasErrors('factsAmount')  }">
+                    <p>Wymagane</p>
+                </div>
+                <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"><p/>
             </div>
+<!--                <div th:if="${#fields.hasErrors('factsAmount')}">-->
+<!--                    <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"></p>-->
+<!--                </div>-->
         </div>
 
-        <br>
-        <button type="submit">Get fact</button>
+        <button type="submit" class="btn btn-primary">Get fact</button>
     </form>
 </body>
 </html>

@@ -12,6 +12,7 @@ public class MainController {
     public String mainPage(Model model) {
         GeneratorParametersDTO generatorParameters = new GeneratorParametersDTO();
         model.addAttribute("generatorParameters", generatorParameters);
+        model.addAttribute("validated", false);
         return "home";
     }
 

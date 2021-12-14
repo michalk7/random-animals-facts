@@ -2,9 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Facts</title>
+    <title>Random Animals Facts</title>
+    <link th:include="fragments/header :: header-css" th:remove="tag"/>
 </head>
 <body>
+    <div th:replace="fragments/header :: header"></div>
+
     <h1>Facts for today:</h1>
     <table>
         <thead>
