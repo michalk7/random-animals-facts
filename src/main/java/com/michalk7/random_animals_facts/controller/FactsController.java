@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,9 +26,12 @@ public class FactsController {
 
     @PostMapping("/generate")
     public String generateFacts(@Valid @ModelAttribute("generatorParameters")GeneratorParametersDTO generatorParametersDTO,
-                                BindingResult bindingResult, Model model) {
+                                BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) {
         if(bindingResult.hasErrors()) {
-            return "home";
+            redirectAttrs.addFlashAttribute("generatorParameters", generatorParametersDTO);
+            redirectAttrs.addFlashAttribute("org.springframework.validation.BindingResult.generatorParameters", bindingResult);
+            //redirectAttrs.addFlashAttribute("validated", true);
+            return "redirect:/home";
         }
 
         String animalType = generatorParametersDTO.getAnimalType();

@@ -4,15 +4,21 @@ import com.michalk7.random_animals_facts.dto.GeneratorParametersDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MainController {
 
-    @GetMapping({"", "/"})
+    @GetMapping({"", "/", "/home"})
     public String mainPage(Model model) {
-        GeneratorParametersDTO generatorParameters = new GeneratorParametersDTO();
-        model.addAttribute("generatorParameters", generatorParameters);
-        model.addAttribute("validated", false);
+        if(!model.containsAttribute("generatorParameters")) {
+            GeneratorParametersDTO generatorParameters = new GeneratorParametersDTO();
+            model.addAttribute("generatorParameters", generatorParameters);
+        }
+        if(!model.containsAttribute("validated")) {
+            model.addAttribute("validated", false);
+        }
+
         return "home";
     }
 
