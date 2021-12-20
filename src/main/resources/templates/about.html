@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Animals Facts - About</title>
+    <link th:include="fragments/header :: header-css" th:remove="tag"/>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="container">
+        <h1>About</h1>
+
+        <p>This service generate chosen facts by calling external API <a href="https://cat-fact.herokuapp.com">https://cat-fact.herokuapp.com</a></p>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script th:src="@{/js/about.js}"></script>
+</body>
+</html>

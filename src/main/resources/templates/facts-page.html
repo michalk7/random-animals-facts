@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Random Animals Facts</title>
+    <title>Random Animals Facts - Fact List</title>
     <link th:include="fragments/header :: header-css" th:remove="tag"/>
 </head>
 <body>
@@ -37,5 +37,7 @@
         <hr>
         <a th:href="@{'/'}" class="btn btn-outline-primary" role="button">Back to main page</a>
     </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
