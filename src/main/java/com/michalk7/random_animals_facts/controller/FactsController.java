@@ -30,7 +30,6 @@ public class FactsController {
         if(bindingResult.hasErrors()) {
             redirectAttrs.addFlashAttribute("generatorParameters", generatorParametersDTO);
             redirectAttrs.addFlashAttribute("org.springframework.validation.BindingResult.generatorParameters", bindingResult);
-            //redirectAttrs.addFlashAttribute("validated", true);
             return "redirect:/home";
         }
 
