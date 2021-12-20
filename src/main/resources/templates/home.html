@@ -8,43 +8,46 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <h1>Welcome in Random Animals Facts App!</h1>
-    <p>Choose an animal type for which you want to receive a fact.</p>
+    <div class="container">
+        <h1>Welcome in Random Animals Facts App!</h1>
+        <p>Choose an animal type for which you want to receive a fact.</p>
 
-    <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post"
-          novalidate th:classappend="${ not #ctx.containsVariable('validated') } ? 'was-validated' : 'needs-validation'">
-        <div class="mb-3 has-validation">
-            <label for="animalType" class="form-label">Animal Type:</label>
-            <div>
-                <select id="animalType" th:field="*{animalType}" required class="form-select form-select-lg mb-3"
-                        th:classappend="${ #fields.hasErrors('animalType') } ? 'is-invalid' : (${ not #ctx.containsVariable('validated') } ? 'is-valid')">
-                    <option th:value="'dog'" th:text="Dog"></option>
-                    <option th:value="'cat'" th:text="Cat"></option>
-                </select>
+        <form action="#" th:action="@{/facts/generate}" th:object="${generatorParameters}" method="post"
+              novalidate th:classappend="${ not #ctx.containsVariable('validated') } ? 'was-validated' : 'needs-validation'">
+            <div class="mb-3 has-validation">
+                <label for="animalType" class="form-label">Animal Type:</label>
+                <div>
+                    <select id="animalType" th:field="*{animalType}" required class="form-select form-select-lg mb-3"
+                            th:classappend="${ #fields.hasErrors('animalType') } ? 'is-invalid' : (${ not #ctx.containsVariable('validated') } ? 'is-valid')">
+                        <option th:value="'dog'" th:text="Dog"></option>
+                        <option th:value="'cat'" th:text="Cat"></option>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">
+                        <p>Field is required</p>
+                    </div>
+                    <div class="invalid-server-side-feedback" th:if="${#fields.hasErrors('animalType')}">
+                        <p th:each="err : ${#fields.errors('animalType')}" th:text="${err}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 has-validation">
+                <label for="factsAmount" class="form-label">Facts Amount:</label>
+                <input class="form-control" id="factsAmount" type="number" required th:field="*{factsAmount}"
+                      min="1" th:classappend="${ #fields.hasErrors('factsAmount') } ? 'is-invalid' : (${ not #ctx.containsVariable('validated') } ? 'is-valid')"/>
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">
-                    <p>Field is required</p>
+                    <p>Field is required and needs to be greater than 1</p>
                 </div>
-                <div class="invalid-server-side-feedback" th:if="${#fields.hasErrors('animalType')}">
-                    <p th:each="err : ${#fields.errors('animalType')}" th:text="${err}"></p>
-                </div>
+    <!--            <div class="invalid-server-side-feedback" th:if="${#fields.hasErrors('factsAmount')}">-->
+    <!--                <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"><p/>-->
+    <!--            </div>-->
             </div>
-        </div>
-        <div class="mb-3 has-validation">
-            <label for="factsAmount" class="form-label">Facts Amount:</label>
-            <input class="form-control" id="factsAmount" type="number" required th:field="*{factsAmount}"
-                  min="1" th:classappend="${ #fields.hasErrors('factsAmount') } ? 'is-invalid' : (${ not #ctx.containsVariable('validated') } ? 'is-valid')"/>
-            <div class="valid-feedback">Looks good!</div>
-            <div class="invalid-feedback">
-                <p>Field is required and needs to be greater than 1</p>
-            </div>
-<!--            <div class="invalid-server-side-feedback" th:if="${#fields.hasErrors('factsAmount')}">-->
-<!--                <p th:each="err : ${#fields.errors('factsAmount')}" th:text="${err}"><p/>-->
-<!--            </div>-->
-        </div>
 
-        <button type="submit" class="btn btn-primary">Get fact</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Get fact</button>
+        </form>
+
+    </div>
 
     <div th:replace="fragments/footer :: footer"></div>
 

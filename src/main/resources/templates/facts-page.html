@@ -8,32 +8,34 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <h1>Facts for today:</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Fact</th>
-                <th>Author</th>
-                <th>Source</th>
-                <th>Verified</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${#lists.isEmpty(factList)}">
-                <td colspan="4">No data.</td>
-            </tr>
-            <tr th:each="fact, iStat : ${factList}">
-                <td><span th:text="${iStat.index + 1}"></span></td>
-                <td><span th:text="${fact.text}"></span></td>
-                <td><span th:text="${fact.user}"></span></td>
-                <td><span th:text="${fact.source}"></span></td>
-                <td><span th:text="${fact.status.isVerified()}"></span></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Facts for today:</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fact</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Verified</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(factList)}">
+                    <td colspan="4">No data.</td>
+                </tr>
+                <tr th:each="fact, iStat : ${factList}">
+                    <th scope="row"><span th:text="${iStat.index + 1}"></span></th>
+                    <td><span th:text="${fact.text}"></span></td>
+                    <td><span th:text="${fact.user}"></span></td>
+                    <td><span th:text="${fact.source}"></span></td>
+                    <td><span th:text="${fact.status.isVerified()}"></span></td>
+                </tr>
+            </tbody>
+        </table>
 
-    <hr>
-    <a th:href="@{'/'}">Back to main page</a>
+        <hr>
+        <a th:href="@{'/'}" class="btn btn-outline-primary" role="button">Back to main page</a>
+    </div>
 </body>
 </html>
